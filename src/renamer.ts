@@ -19,7 +19,7 @@ fs.readdir(folder, async (err, files) => {
     const oldName = `${element}`;
     const newName = `${sheikhName} ${names[index]}.mp3`;
     const data = {
-      artist: sheikhName,
+      artist: `Sheikh ${sheikhName}`.trim(),
       track: `${index + 1}/114`,
       album: `Sheikh ${sheikhName}`.trim(),
       title: newName,
