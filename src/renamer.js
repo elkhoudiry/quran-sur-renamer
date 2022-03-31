@@ -1,4 +1,54 @@
-[
+const fs = require("fs");
+const path = require("path");
+const readLine = require("readline-sync");
+// @ts-ignore
+const ffmetadata = require("ffmetadata");
+
+function main() {
+  const folder = readLine
+    .questionPath("What is the path ?: ", {
+      isDirectory: true,
+    })
+    .trim();
+  const sheikhName = readLine.question("What is the sheikh name ?: ").trim();
+
+  fs.readdir(folder, async (err, files) => {
+    for (let [index, oldFile] of Object.entries(files)) {
+      const newName = `${sheikhName} ${names[index]}.mp3`;
+      const data = {
+        artist: `Sheikh ${sheikhName}`,
+        track: `${index + 1}/114`,
+        album: `Sheikh ${sheikhName}`,
+        title: newName,
+        date: new Date().toISOString(),
+      };
+      const options = {
+        attachments: ["quran.jpg"],
+      };
+
+      await writeMetadata(path.join(folder, oldFile), data, options);
+
+      fs.renameSync(path.join(folder, oldFile), path.join(folder, newName));
+
+      console.log(`Done: ${newName} ✔`);
+    }
+  });
+}
+
+async function writeMetadata(path, data, options) {
+  return new Promise((resolve, reject) => {
+    ffmetadata.write(path, data, options, (err) => {
+      if (err) {
+        console.log("[DEBUG] error:", err);
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+const names = [
   "001 Al-Fatihah الفاتحة (the Opening)",
   "002 Al-Baqarah البقرة (the Cow)",
   "003 Aali Imran آل عمران (the Family of Imran)",
@@ -112,5 +162,7 @@
   "111 Al-Masad المسد (the Palm Fiber)",
   "112 Al-Ikhlas الإخلاص (the Sincerity)",
   "113 Al-Falaq الفلق (the Daybreak)",
-  "114 An-Nas الناس (Mankind)"
-]
+  "114 An-Nas الناس (Mankind)",
+];
+
+main();

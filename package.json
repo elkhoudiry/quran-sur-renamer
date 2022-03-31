@@ -1,21 +1,15 @@
 {
-    "name": "sur-renamer",
-    "version": "1.0.0",
-    "description": "Renamer for Quran Sur from Digits to Letters names",
-    "main": "renamer.js",
-    "author": "Elkhoduiry",
-    "license": "MIT",
-    "scripts": {
-        "start": "tsc && node build/renamer.js"
-    },
-    "devDependencies": {
-        "@types/node": "^16.9.1",
-        "@types/readline-sync": "^1.4.4",
-        "ts-node": "^10.2.1",
-        "typescript": "^4.4.3"
-    },
-    "dependencies": {
-        "ffmetadata": "^1.7.0",
-        "readline-sync": "^1.4.10"
-    }
+  "name": "sur-renamer",
+  "version": "1.0.0",
+  "description": "Renamer for Quran Sur from Digits to Letters names",
+  "main": "renamer.js",
+  "author": "Elkhoduiry",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/renamer.js"
+  },
+  "dependencies": {
+    "ffmetadata": "^1.7.0",
+    "readline-sync": "^1.4.10"
+  }
 }
